@@ -1,0 +1,50 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "admin",
+      "password": "123456",
+      "role": "ADMIN"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Coca Cola",
+      "price": 10000
+    },
+    {
+      "id": 2,
+      "name": "Pepsi",
+      "price": 10000
+    },
+    {
+      "id": 3,
+      "name": "Snack Oishi",
+      "price": 8000
+    },
+    {
+      "id": 4,
+      "name": "Mirinda Soda Kem",
+      "price": 12000
+    }
+  ],
+  "slots": [
+    {
+      "id": 1,
+      "product_id": 1,
+      "quantity": 10
+    },
+    {
+      "id": 2,
+      "product_id": 2,
+      "quantity": 8
+    },
+    {
+      "id": 3,
+      "product_id": 3,
+      "quantity": 15
+    }
+  ],
+  "transactions": []
+}
