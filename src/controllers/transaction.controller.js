@@ -1,18 +1,29 @@
 import { readData, writeData, getNextId } from "../utils/fileDb.js";
 import { OK } from "../handler/success-response.js";
+import Transaction from "../models/transaction.model.js";
 
 class TransactionController {
   getAll = async (req, res, next) => {
     try {
       const data = await readData();
-      res
-        .status(200)
-        .json(
-          new OK({
-            message: "Transactions retrieved",
-            metadata: { transactions: data.transactions },
-          })
-        );
+      const transactions = data.transactions.map(
+        (t) =>
+          new Transaction(
+            t.id,
+            t.slot_id,
+            t.product_id,
+            t.quantity,
+            t.total_price,
+            t.money_received,
+            t.created_at
+          )
+      );
+      res.status(200).json(
+        new OK({
+          message: "Transactions retrieved",
+          metadata: { transactions },
+        })
+      );
     } catch (err) {
       next(err);
     }
@@ -22,12 +33,10 @@ class TransactionController {
     try {
       const { slot_id, quantity = 1, money_received } = req.body;
       if (slot_id == null || money_received == null) {
-        return res
-          .status(400)
-          .json({
-            status: "ERROR",
-            message: "slot_id and money_received are required",
-          });
+        return res.status(400).json({
+          status: "ERROR",
+          message: "slot and money are required",
+        });
       }
 
       const data = await readData();
@@ -41,12 +50,10 @@ class TransactionController {
         (p) => p.id === Number(slot.product_id)
       );
       if (!product)
-        return res
-          .status(404)
-          .json({
-            status: "ERROR",
-            message: "Product not found for this slot",
-          });
+        return res.status(404).json({
+          status: "ERROR",
+          message: "Product not found for this slot",
+        });
 
       if (slot.quantity < quantity)
         return res
@@ -64,28 +71,34 @@ class TransactionController {
 
       // create transaction
       const id = await getNextId("transactions");
-      const trx = {
+      const trx = new Transaction(
         id,
-        slot_id: slot.id,
-        product_id: product.id,
-        quantity: Number(quantity),
+        slot.id,
+        product.id,
+        Number(quantity),
         total_price,
-        money_received: Number(money_received),
-        created_at: new Date().toISOString(),
-      };
+        Number(money_received),
+        new Date().toISOString()
+      );
 
-      data.transactions.push(trx);
+      data.transactions.push({
+        id: trx.id,
+        slot_id: trx.slot_id,
+        product_id: trx.product_id,
+        quantity: trx.quantity,
+        total_price: trx.total_price,
+        money_received: trx.money_received,
+        created_at: trx.created_at,
+      });
       await writeData(data);
 
       const change = Number(money_received) - total_price;
-      res
-        .status(201)
-        .json(
-          new OK({
-            message: "Transaction created",
-            metadata: { transaction: trx, change },
-          })
-        );
+      res.status(201).json(
+        new OK({
+          message: "Transaction created",
+          metadata: { transaction: trx, change },
+        })
+      );
     } catch (err) {
       next(err);
     }
