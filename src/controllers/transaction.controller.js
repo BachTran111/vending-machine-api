@@ -3,6 +3,29 @@ import { OK } from "../handler/success-response.js";
 import Transaction from "../models/transaction.model.js";
 
 class TransactionController {
+  deposit = async (req, res, next) => {
+    try {
+      const { amount } = req.body;
+      if (!amount || isNaN(Number(amount)) || Number(amount) <= 0) {
+        return res.status(400).json({
+          status: "ERROR",
+          message: "Amount must be a positive number",
+        });
+      }
+      const data = await readData();
+      data.currentMoney = (data.currentMoney || 0) + Number(amount);
+      await writeData(data);
+      res.status(200).json(
+        new OK({
+          message: "Money deposited",
+          metadata: { currentMoney: data.currentMoney },
+        })
+      );
+    } catch (err) {
+      next(err);
+    }
+  };
+
   getAll = async (req, res, next) => {
     try {
       const data = await readData();
@@ -31,14 +54,7 @@ class TransactionController {
 
   create = async (req, res, next) => {
     try {
-      const { slot_id, quantity = 1, money_received } = req.body;
-      if (slot_id == null || money_received == null) {
-        return res.status(400).json({
-          status: "ERROR",
-          message: "slot and money are required",
-        });
-      }
-
+      const { slot_id, quantity = 1 } = req.body;
       const data = await readData();
       const slot = data.slots.find((s) => s.id === Number(slot_id));
       if (!slot)
@@ -61,13 +77,17 @@ class TransactionController {
           .json({ status: "ERROR", message: "Not enough stock" });
 
       const total_price = product.price * Number(quantity);
-      if (Number(money_received) < total_price)
+
+      if ((data.currentMoney || 0) < total_price)
         return res
           .status(400)
-          .json({ status: "ERROR", message: "Not enough money" });
+          .json({ status: "ERROR", message: "Not enough money in machine" });
 
       // update stock
       slot.quantity -= Number(quantity);
+
+      // update currentMoney
+      data.currentMoney -= total_price;
 
       // create transaction
       const id = await getNextId("transactions");
@@ -77,7 +97,7 @@ class TransactionController {
         product.id,
         Number(quantity),
         total_price,
-        Number(money_received),
+        total_price, // money_received = total_price (vì lấy từ currentMoney)
         new Date().toISOString()
       );
 
@@ -92,11 +112,10 @@ class TransactionController {
       });
       await writeData(data);
 
-      const change = Number(money_received) - total_price;
       res.status(201).json(
         new OK({
           message: "Transaction created",
-          metadata: { transaction: trx, change },
+          metadata: { transaction: trx, currentMoney: data.currentMoney },
         })
       );
     } catch (err) {
