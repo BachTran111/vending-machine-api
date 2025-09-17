@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 
+import authRouter from "./routes/auth.route.js";
 import productRouter from "./routes/product.route.js";
 import slotRouter from "./routes/slot.route.js";
 import transactionRouter from "./routes/transaction.route.js";
@@ -15,6 +16,7 @@ app.use(cors({ origin: "*" }));
 app.use(morgan("dev"));
 
 // routes
+app.use("/api/auth", authRouter);
 app.use("/api/products", productRouter);
 app.use("/api/slots", slotRouter);
 app.use("/api/transactions", transactionRouter);
