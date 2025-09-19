@@ -20,12 +20,17 @@
     },
     {
       "id": 3,
-      "name": "Snack Oishi",
-      "price": 8000
+      "name": "Fanta",
+      "price": 15000
     },
     {
       "id": 4,
       "name": "Mirinda Soda Kem",
+      "price": 12000
+    },
+    {
+      "id": 5,
+      "name": "Mirinda Soda Trang",
       "price": 12000
     }
   ],
@@ -33,7 +38,7 @@
     {
       "id": 1,
       "product_id": 1,
-      "quantity": 10
+      "quantity": 3
     },
     {
       "id": 2,
@@ -43,7 +48,12 @@
     {
       "id": 3,
       "product_id": 3,
-      "quantity": 13
+      "quantity": 11
+    },
+    {
+      "id": 4,
+      "product_id": 4,
+      "quantity": 16
     }
   ],
   "transactions": [
@@ -55,7 +65,16 @@
       "total_price": 16000,
       "money_received": 16000,
       "created_at": "2025-09-15T17:34:44.682Z"
+    },
+    {
+      "id": 2,
+      "slot_id": 3,
+      "product_id": 3,
+      "quantity": 2,
+      "total_price": 30000,
+      "money_received": 30000,
+      "created_at": "2025-09-17T09:14:44.010Z"
     }
   ],
-  "currentMoney": 34000
+  "currentMoney": 0
 }
