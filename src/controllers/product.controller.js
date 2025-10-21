@@ -17,7 +17,7 @@ class ProductController {
 
   getById = async (req, res, next) => {
     try {
-      const id = Number(req.params.id);
+      const id = req.params.id;
       const product = await productService.getById(id);
       if (!product) {
         return res
@@ -51,7 +51,7 @@ class ProductController {
 
   update = async (req, res, next) => {
     try {
-      const id = Number(req.params.id);
+      const id = req.params.id;
       const { name, price } = req.body;
       const product = await productService.update(id, { name, price });
       if (!product) {
@@ -69,7 +69,7 @@ class ProductController {
 
   remove = async (req, res, next) => {
     try {
-      const id = Number(req.params.id);
+      const id = req.params.id;
       const product = await productService.remove(id);
       if (!product) {
         return res

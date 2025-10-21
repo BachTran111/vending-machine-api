@@ -15,7 +15,7 @@ class SlotController {
 
   getById = async (req, res, next) => {
     try {
-      const id = Number(req.params.id);
+      const id = req.params.id;
       const slot = await slotService.getById(id);
       if (!slot)
         return res
@@ -44,7 +44,7 @@ class SlotController {
 
   update = async (req, res, next) => {
     try {
-      const id = Number(req.params.id);
+      const id = req.params.id;
       const { product_id, quantity } = req.body;
       const slot = await slotService.update(id, { product_id, quantity });
       if (!slot)
@@ -62,7 +62,7 @@ class SlotController {
 
   remove = async (req, res, next) => {
     try {
-      const id = Number(req.params.id);
+      const id = req.params.id;
       const slot = await slotService.remove(id);
       if (!slot)
         return res
