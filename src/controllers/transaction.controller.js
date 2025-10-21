@@ -2,6 +2,20 @@ import TransactionService from "../services/transaction.service.js";
 import { OK } from "../handler/success-response.js";
 
 class TransactionController {
+  getCurrentMoney = async (req, res, next) => {
+    try {
+      const transactions = await TransactionService.getCurrentMoney();
+      res.status(200).json(
+        new OK({
+          message: "Deposit retrieved",
+          metadata: { transactions },
+        })
+      );
+    } catch (err) {
+      next(err);
+    }
+  };
+
   deposit = async (req, res, next) => {
     try {
       const { amount } = req.body;

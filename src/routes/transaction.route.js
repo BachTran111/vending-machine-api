@@ -6,6 +6,7 @@ const router = express.Router();
 
 router.get("/", authRequired, transactionController.getAll);
 router.post("/", transactionController.create);
+router.get("/deposit", transactionController.getCurrentMoney);
 router.post("/deposit", transactionController.deposit);
 
 export default router;

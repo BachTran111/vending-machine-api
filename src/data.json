@@ -37,44 +37,233 @@
   "slots": [
     {
       "id": 1,
-      "product_id": 1,
-      "quantity": 3
+      "product_id": 2,
+      "quantity": 5
     },
     {
       "id": 2,
       "product_id": 2,
-      "quantity": 8
+      "quantity": 12
     },
     {
       "id": 3,
       "product_id": 3,
-      "quantity": 11
+      "quantity": 16
     },
     {
       "id": 4,
       "product_id": 4,
-      "quantity": 16
+      "quantity": 36
     }
   ],
   "transactions": [
     {
       "id": 1,
+      "slot_id": 1,
+      "product_id": 1,
+      "quantity": 2,
+      "total_price": 18000,
+      "money_received": 20000,
+      "created_at": "2025-08-25T09:10:00.000Z"
+    },
+    {
+      "id": 2,
+      "slot_id": 2,
+      "product_id": 2,
+      "quantity": 1,
+      "total_price": 10000,
+      "money_received": 10000,
+      "created_at": "2025-08-30T14:12:00.000Z"
+    },
+    {
+      "id": 3,
       "slot_id": 3,
       "product_id": 3,
       "quantity": 2,
       "total_price": 16000,
       "money_received": 16000,
-      "created_at": "2025-09-15T17:34:44.682Z"
+      "created_at": "2025-09-02T10:20:00.000Z"
     },
     {
-      "id": 2,
+      "id": 4,
+      "slot_id": 4,
+      "product_id": 4,
+      "quantity": 1,
+      "total_price": 12000,
+      "money_received": 20000,
+      "created_at": "2025-09-05T08:30:00.000Z"
+    },
+    {
+      "id": 5,
+      "slot_id": 1,
+      "product_id": 1,
+      "quantity": 3,
+      "total_price": 27000,
+      "money_received": 30000,
+      "created_at": "2025-09-10T12:00:00.000Z"
+    },
+    {
+      "id": 6,
+      "slot_id": 2,
+      "product_id": 2,
+      "quantity": 2,
+      "total_price": 20000,
+      "money_received": 20000,
+      "created_at": "2025-09-15T09:15:00.000Z"
+    },
+    {
+      "id": 7,
+      "slot_id": 3,
+      "product_id": 3,
+      "quantity": 1,
+      "total_price": 8000,
+      "money_received": 10000,
+      "created_at": "2025-09-17T07:45:00.000Z"
+    },
+    {
+      "id": 8,
+      "slot_id": 4,
+      "product_id": 4,
+      "quantity": 2,
+      "total_price": 24000,
+      "money_received": 25000,
+      "created_at": "2025-09-20T11:11:00.000Z"
+    },
+    {
+      "id": 9,
+      "slot_id": 1,
+      "product_id": 1,
+      "quantity": 1,
+      "total_price": 9000,
+      "money_received": 10000,
+      "created_at": "2025-09-23T09:00:00.000Z"
+    },
+    {
+      "id": 10,
+      "slot_id": 2,
+      "product_id": 2,
+      "quantity": 3,
+      "total_price": 30000,
+      "money_received": 30000,
+      "created_at": "2025-09-25T15:45:00.000Z"
+    },
+    {
+      "id": 11,
       "slot_id": 3,
       "product_id": 3,
       "quantity": 2,
-      "total_price": 30000,
-      "money_received": 30000,
-      "created_at": "2025-09-17T09:14:44.010Z"
+      "total_price": 16000,
+      "money_received": 20000,
+      "created_at": "2025-09-28T17:30:00.000Z"
+    },
+    {
+      "id": 12,
+      "slot_id": 4,
+      "product_id": 4,
+      "quantity": 1,
+      "total_price": 12000,
+      "money_received": 20000,
+      "created_at": "2025-09-30T19:50:00.000Z"
+    },
+    {
+      "id": 13,
+      "slot_id": 1,
+      "product_id": 1,
+      "quantity": 1,
+      "total_price": 9000,
+      "money_received": 10000,
+      "created_at": "2025-10-01T10:00:00.000Z"
+    },
+    {
+      "id": 14,
+      "slot_id": 2,
+      "product_id": 2,
+      "quantity": 2,
+      "total_price": 20000,
+      "money_received": 20000,
+      "created_at": "2025-10-02T12:10:00.000Z"
+    },
+    {
+      "id": 15,
+      "slot_id": 3,
+      "product_id": 3,
+      "quantity": 3,
+      "total_price": 24000,
+      "money_received": 25000,
+      "created_at": "2025-10-03T09:50:00.000Z"
+    },
+    {
+      "id": 16,
+      "slot_id": 4,
+      "product_id": 4,
+      "quantity": 2,
+      "total_price": 24000,
+      "money_received": 25000,
+      "created_at": "2025-10-04T14:40:00.000Z"
+    },
+    {
+      "id": 17,
+      "slot_id": 1,
+      "product_id": 1,
+      "quantity": 2,
+      "total_price": 18000,
+      "money_received": 20000,
+      "created_at": "2025-10-05T08:20:00.000Z"
+    },
+    {
+      "id": 18,
+      "slot_id": 2,
+      "product_id": 2,
+      "quantity": 1,
+      "total_price": 10000,
+      "money_received": 10000,
+      "created_at": "2025-10-06T09:15:00.000Z"
+    },
+    {
+      "id": 19,
+      "slot_id": 3,
+      "product_id": 3,
+      "quantity": 1,
+      "total_price": 8000,
+      "money_received": 10000,
+      "created_at": "2025-10-07T07:30:00.000Z"
+    },
+    {
+      "id": 20,
+      "slot_id": 4,
+      "product_id": 4,
+      "quantity": 3,
+      "total_price": 36000,
+      "money_received": 40000,
+      "created_at": "2025-10-07T09:45:00.000Z"
+    },
+    {
+      "id": 21,
+      "slot_id": 1,
+      "product_id": 2,
+      "quantity": 2,
+      "total_price": 20000,
+      "money_received": 20000,
+      "created_at": "2025-10-08T07:48:40.732Z"
+    },
+    {
+      "id": 22,
+      "slot_id": 2,
+      "product_id": 2,
+      "quantity": 1,
+      "total_price": 10000,
+      "money_received": 10000,
+      "created_at": "2025-10-08T09:10:04.065Z"
+    },
+    {
+      "id": 23,
+      "slot_id": 3,
+      "product_id": 3,
+      "quantity": 1,
+      "total_price": 15000,
+      "money_received": 15000,
+      "created_at": "2025-10-08T09:10:20.068Z"
     }
   ],
-  "currentMoney": 0
+  "currentMoney": 945000
 }
