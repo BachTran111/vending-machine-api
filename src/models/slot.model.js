@@ -10,10 +10,17 @@
 
 import mongoose from "mongoose";
 
-const slotSchema = new mongoose.Schema({
-  product: { type: mongoose.Schema.Types.ObjectId, ref: "Product", required: true },
-  quantity: { type: Number, default: 0 },
-});
+const slotSchema = new mongoose.Schema(
+  {
+    product: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Product",
+      default: null,
+    },
+    quantity: { type: Number, default: 0 },
+  },
+  { timestamps: true }
+);
 
 const SlotModel = mongoose.model("Slot", slotSchema);
 export default SlotModel;

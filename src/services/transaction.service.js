@@ -89,7 +89,7 @@ class TransactionService {
   async create(slot_id, quantity = 1) {
     const slot = await SlotModel.findById(slot_id);
     if (!slot) throw new Error("Slot not found");
-    const product = await ProductModel.findById(slot.product);
+    const product = await ProductModel.findOne({ id: slot.product_id });
     if (!product) throw new Error("Product not found for this slot");
     if (slot.quantity < quantity) throw new Error("Not enough stock");
 

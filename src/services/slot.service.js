@@ -67,13 +67,18 @@ class SlotService {
     return SlotModel.findById(id).populate("product").lean();
   }
 
-  async create(product_id, quantity = 0) {
-    const product = await ProductModel.findById(product_id);
-    if (!product) throw new Error("product_id not found");
+  async create(product_id = null, quantity = 0) {
+    let product = null;
+    if (product_id) {
+      const found = await ProductModel.findById(product_id);
+      if (found) product = found;
+    }
+
     const s = await SlotModel.create({
-      product: product._id,
-      quantity: Number(quantity),
+      product: product ? product._id : null,
+      quantity: Number(quantity) || 0,
     });
+
     return s.toObject();
   }
 

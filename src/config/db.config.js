@@ -13,7 +13,7 @@ export default async function instanceMongoDB() {
     mongoose.set?.("strictQuery", false);
 
     await mongoose.connect(URI);
-    console.log("✅ Connected to MongoDB");
+    console.log(" Connected to MongoDB");
     return mongoose;
   } catch (err) {
     console.error("MongoDB connection error:", err);
