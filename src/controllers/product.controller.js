@@ -19,11 +19,11 @@ class ProductController {
     try {
       const id = req.params.id;
       const product = await productService.getById(id);
-      if (!product) {
+      if (!product)
         return res
           .status(404)
           .json({ status: "ERROR", message: "Product not found" });
-      }
+
       res
         .status(200)
         .json(new OK({ message: "Product retrieved", metadata: { product } }));
@@ -35,11 +35,11 @@ class ProductController {
   create = async (req, res, next) => {
     try {
       const { name, price } = req.body;
-      if (!name || price == null) {
+      if (!name || price == null)
         return res
           .status(400)
           .json({ status: "ERROR", message: "Name and price required" });
-      }
+
       const product = await productService.create(name, price);
       res
         .status(201)
@@ -54,11 +54,11 @@ class ProductController {
       const id = req.params.id;
       const { name, price } = req.body;
       const product = await productService.update(id, { name, price });
-      if (!product) {
+      if (!product)
         return res
           .status(404)
           .json({ status: "ERROR", message: "Product not found" });
-      }
+
       res
         .status(200)
         .json(new OK({ message: "Product updated", metadata: { product } }));
@@ -71,11 +71,11 @@ class ProductController {
     try {
       const id = req.params.id;
       const product = await productService.remove(id);
-      if (!product) {
+      if (!product)
         return res
           .status(404)
           .json({ status: "ERROR", message: "Product not found" });
-      }
+
       res
         .status(200)
         .json(new OK({ message: "Product deleted", metadata: { product } }));

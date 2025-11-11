@@ -27,7 +27,7 @@ const slotSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-slotSchema.plugin(AutoIncrement, { inc_field: "id", start_seq: 1 });
+slotSchema.plugin(AutoIncrement, { inc_field: "slot_id" });
 
 const SlotModel = mongoose.model("Slot", slotSchema);
 export default SlotModel;

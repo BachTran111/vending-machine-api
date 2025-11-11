@@ -20,7 +20,7 @@ const productSchema = new mongoose.Schema({
   price: { type: Number, required: true },
 });
 
-productSchema.plugin(AutoIncrement, { inc_field: "id", start_seq: 1 });
+productSchema.plugin(AutoIncrement, { inc_field: "product_id" });
 
 const ProductModel = mongoose.model("Product", productSchema);
 export default ProductModel;

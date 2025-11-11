@@ -40,7 +40,7 @@ const transactionSchema = new mongoose.Schema({
   created_at: { type: Date, default: Date.now },
 });
 
-transactionSchema.plugin(AutoIncrement, { inc_field: "id", start_seq: 1 });
+transactionSchema.plugin(AutoIncrement, { inc_field: "transaction_id" });
 
 const TransactionModel = mongoose.model("Transaction", transactionSchema);
 export default TransactionModel;

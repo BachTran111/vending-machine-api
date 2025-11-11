@@ -32,22 +32,18 @@ class SlotController {
 
   create = async (req, res, next) => {
     try {
-      const body = req.body || {};
-      const { product_id = null, quantity = 0 } = body;
-
+      const { product_id = null, quantity = 0 } = req.body || {};
       const slot = await slotService.create(product_id, quantity);
-
-      res.status(201).json(
-        new OK({
-          message: "Slot created successfully",
-          metadata: { slot },
-        })
-      );
+      res
+        .status(201)
+        .json(new OK({ message: "Slot created", metadata: { slot } }));
     } catch (err) {
-      res.status(400).json({
-        status: "ERROR",
-        message: err.message || "Failed to create slot",
-      });
+      res
+        .status(400)
+        .json({
+          status: "ERROR",
+          message: err.message || "Failed to create slot",
+        });
     }
   };
 

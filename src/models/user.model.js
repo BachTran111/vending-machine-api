@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema({
   role: { type: String, default: "USER" },
 });
 
-userSchema.plugin(AutoIncrement, { inc_field: "id", start_seq: 1 });
+userSchema.plugin(AutoIncrement, { inc_field: "user_id" });
 
 const UserModel = mongoose.model("User", userSchema);
 export default UserModel;
