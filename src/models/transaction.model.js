@@ -23,11 +23,10 @@
 import mongoose from "mongoose";
 import AutoIncrementFactory from "mongoose-sequence";
 
-const connection = mongoose.connection;
-const AutoIncrement = AutoIncrementFactory(connection);
+const AutoIncrement = AutoIncrementFactory(mongoose);
 
 const transactionSchema = new mongoose.Schema({
-  id: { type: Number, unique: true },
+  transaction_id: { type: Number, unique: true },
   slot: { type: mongoose.Schema.Types.ObjectId, ref: "Slot", required: true },
   product: {
     type: mongoose.Schema.Types.ObjectId,
@@ -40,7 +39,10 @@ const transactionSchema = new mongoose.Schema({
   created_at: { type: Date, default: Date.now },
 });
 
-transactionSchema.plugin(AutoIncrement, { inc_field: "transaction_id" });
+transactionSchema.plugin(AutoIncrement, {
+  inc_field: "transaction_id",
+  start_seq: 1,
+});
 
 const TransactionModel = mongoose.model("Transaction", transactionSchema);
 export default TransactionModel;

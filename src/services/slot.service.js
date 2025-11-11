@@ -10,7 +10,7 @@ class SlotService {
     if (!id) return null;
     return isNaN(id)
       ? SlotModel.findById(id).populate("product").lean()
-      : SlotModel.findOne({ id: Number(id) })
+      : SlotModel.findOne({ slot_id: Number(id) })
           .populate("product")
           .lean();
   }
@@ -22,13 +22,15 @@ class SlotService {
       if (isNaN(product_id)) {
         product = await ProductModel.findById(product_id);
       } else {
-        product = await ProductModel.findOne({ id: Number(product_id) });
+        product = await ProductModel.findOne({
+          product_id: Number(product_id),
+        });
       }
       if (!product) throw new Error("Product not found");
     }
 
     const s = await SlotModel.create({
-      product: product ? product._id : null,
+      product: product ? product.product_id : null,
       quantity: Number(quantity) || 0,
     });
 
@@ -38,7 +40,7 @@ class SlotService {
   async update(id, { product_id, quantity }) {
     const slot = isNaN(id)
       ? await SlotModel.findById(id)
-      : await SlotModel.findOne({ id: Number(id) });
+      : await SlotModel.findOne({ slot_id: Number(id) });
 
     if (!slot) return null;
 
@@ -47,7 +49,9 @@ class SlotService {
       if (isNaN(product_id)) {
         product = await ProductModel.findById(product_id);
       } else {
-        product = await ProductModel.findOne({ id: Number(product_id) });
+        product = await ProductModel.findOne({
+          product_id: Number(product_id),
+        });
       }
       if (!product) throw new Error("product_id not found");
       slot.product = product._id;
@@ -61,7 +65,7 @@ class SlotService {
   async remove(id) {
     return isNaN(id)
       ? await SlotModel.findByIdAndDelete(id).lean()
-      : await SlotModel.findOneAndDelete({ id: Number(id) }).lean();
+      : await SlotModel.findOneAndDelete({ slot_id: Number(id) }).lean();
   }
 }
 

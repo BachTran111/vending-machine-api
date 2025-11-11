@@ -29,7 +29,7 @@ class TransactionService {
   async create(slot_id, quantity = 1) {
     const slot = isNaN(slot_id)
       ? await SlotModel.findById(slot_id)
-      : await SlotModel.findOne({ id: Number(slot_id) });
+      : await SlotModel.findOne({ slot_id: Number(slot_id) });
 
     if (!slot) throw new Error("Slot not found");
 

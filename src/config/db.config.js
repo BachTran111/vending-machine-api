@@ -8,7 +8,7 @@ const URI = "mongodb://localhost:27017/vending";
 export default async function instanceMongoDB() {
   if (mongoose.connection.readyState === 1) return mongoose;
   try {
-    mongoose.set("debug", true);
+    mongoose.set("debug", false);
     mongoose.set("debug", { color: true });
     mongoose.set?.("strictQuery", false);
 

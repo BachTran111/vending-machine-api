@@ -9,7 +9,7 @@ class ProductService {
     if (!id) return null;
 
     if (!isNaN(id)) {
-      return ProductModel.findOne({ id: Number(id) }).lean();
+      return ProductModel.findOne({ product_id: Number(id) }).lean();
     }
 
     return ProductModel.findById(id).lean();
@@ -35,7 +35,7 @@ class ProductService {
 
     const product = isNaN(id)
       ? await ProductModel.findByIdAndUpdate(id, upd, { new: true }).lean()
-      : await ProductModel.findOneAndUpdate({ id: Number(id) }, upd, {
+      : await ProductModel.findOneAndUpdate({ product_id: Number(id) }, upd, {
           new: true,
         }).lean();
 
@@ -48,14 +48,14 @@ class ProductService {
     const used = isNaN(id)
       ? await SlotModel.exists({ product: id })
       : await SlotModel.exists({
-          product: await ProductModel.findOne({ id: Number(id) }),
+          product: await ProductModel.findOne({ product_id: Number(id) }),
         });
 
     if (used) throw new Error("Cannot delete product referenced by slot");
 
     const removed = isNaN(id)
       ? await ProductModel.findByIdAndDelete(id).lean()
-      : await ProductModel.findOneAndDelete({ id: Number(id) }).lean();
+      : await ProductModel.findOneAndDelete({ product_id: Number(id) }).lean();
 
     return removed;
   }
