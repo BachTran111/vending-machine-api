@@ -9,11 +9,18 @@
 // export default Product;
 
 import mongoose from "mongoose";
+import AutoIncrementFactory from "mongoose-sequence";
+
+const connection = mongoose.connection;
+const AutoIncrement = AutoIncrementFactory(connection);
 
 const productSchema = new mongoose.Schema({
+  id: { type: Number, unique: true },
   name: { type: String, required: true, unique: true },
   price: { type: Number, required: true },
 });
+
+productSchema.plugin(AutoIncrement, { inc_field: "id", start_seq: 1 });
 
 const ProductModel = mongoose.model("Product", productSchema);
 export default ProductModel;
