@@ -34,16 +34,16 @@ class TransactionService {
     if (!slot) throw new Error("Slot not found");
 
     const product = await ProductModel.findById(slot.product);
-    if (!product) throw new Error("Product not found for this slot");
-    if (slot.quantity < quantity) throw new Error("Not enough stock");
+    // if (!product) throw new Error("Product not found for this slot");
+    // if (slot.quantity < quantity) throw new Error("Not enough stock");
 
     const total_price = product.price * Number(quantity);
 
     const machine = await MachineModel.findOne({});
     const currentMoney = (machine && machine.currentMoney) || 0;
 
-    if (currentMoney < total_price)
-      throw new Error("Not enough money in machine");
+    // if (currentMoney < total_price)
+    //   throw new Error("Not enough money in machine");
 
     slot.quantity -= Number(quantity);
     await slot.save();
