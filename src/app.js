@@ -22,7 +22,7 @@ app.use("/api/slots", slotRouter);
 app.use("/api/transactions", transactionRouter);
 app.use("/api/money", moneyRoute);
 
-app.get("/", (req, res) => res.send("🚀 Vending Machine API running..."));
+app.get("/", (req, res) => res.send(" Vending Machine API running..."));
 
 app.use(errorHandler);
 
@@ -30,8 +30,8 @@ app.use(errorHandler);
   try {
     await instanceMongoDB();
     const PORT = process.env.PORT || 5000;
-    app.listen(5000, "0.0.0.0", () => {
-      console.log("Server running on http://0.0.0.0:5000");
+    app.listen(PORT, "0.0.0.0", () => {
+      console.log(`Server running on http://0.0.0.0:${PORT}`);
     });
   } catch (err) {
     console.error("Failed to start server:", err);
