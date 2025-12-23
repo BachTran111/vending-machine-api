@@ -7,6 +7,7 @@ import authRouter from "./routes/auth.route.js";
 import productRouter from "./routes/product.route.js";
 import slotRouter from "./routes/slot.route.js";
 import transactionRouter from "./routes/transaction.route.js";
+import moneyRoute from "./routes/money.route.js";
 import { errorHandler } from "./middlewares/error-handler.js";
 
 const app = express();
@@ -19,6 +20,7 @@ app.use("/api/auth", authRouter);
 app.use("/api/products", productRouter);
 app.use("/api/slots", slotRouter);
 app.use("/api/transactions", transactionRouter);
+app.use("/api/money", moneyRoute);
 
 app.get("/", (req, res) => res.send("🚀 Vending Machine API running..."));
 
